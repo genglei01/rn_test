@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useState,useEffect} from 'react';
 import { Text, View ,Image} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -12,9 +12,15 @@ useScreens();
 const Stack = createStackNavigator();
 
 function HomeScreen({navigation}) {
+  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    setLoading(true);
+  }, []);
+
   return (
      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
+      <Text>{loading?"11111111":"2222222"}</Text>
       <BaseButton onPress={()=>{navigation.navigate('Detail1')}}><Text>Go to Detail1</Text></BaseButton>
     </View>
   );
@@ -25,7 +31,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
-              <Stack.Screen name="Detail1" component={DetailScreen} />
+  <Stack.Screen name="Detail1" component={DetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
